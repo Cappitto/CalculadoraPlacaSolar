@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">Calculadora de Placas Solares</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
+    <string name="action_about">Sobre</string>
+    <string name="panelAmount"><b>Quantidade de placas solares:</b>\n</string>
+    <string name="calculate_again">Calcular novamente</string>
+    <string name="ok">OK</string>
+    <string name="fill_boxes">Preencha os campos vazios</string>
+    <string name="energy">Energia utilizada em Watts</string>
+    <string name="hoursPerDay">Horas de consumo por dia</string>
+    <string name="insolation">Indice de insolação da região</string>
+    <string name="percentInverter">Efetividade do inversor</string>
+    <string name="solarPanelPower">Potência da placa solar em Watts</string>
+    <string name="calculate">Calcular</string>
+    <string name="calculator">Calculadora</string>
+    <string name="linkSource">github.com/Cappitto/CalculadoraPlacaSolar</string>
+    <string name="aboutApp">Sobre a aplicação</string>
+    <string name="about"><b>Desenvolvedor:</b> Elizeu Cappelli\n<b>Github:</b>\n<a href="https://github.com/Cappitto">github.com/Cappitto</a>\n<b>Email:</b> elizeu.cappelli@gmail.com</string>
+    <string name="idealizers"><b>Idealizadores do projeto:</b>\n Tiago Lavinhati, Felipe Wallace e Matheus Ian</string>
+    <string name="projectDescription"><b>Descrição da aplicação:</b>\n A aplicação foi desenvolvida com intuito de facilitar os idealizadores do projeto a realizar cálculos durante a apresentação do Trabalho de Conclusão de Curso.</string>
+    <string name="appSource"><b>Github da aplicação:</b>\n<a href="https://github.com/Cappitto/CalculadoraPlacaSolar">github.com/Cappitto/CalculadoraPlacaSolar</a></string>
+
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,6 +14,7 @@
         android:id="@+id/layoutEditTextEnergy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/blackHint"
         android:layout_alignParentTop="true">
 
         <EditText
@@ -20,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="number"
-            android:hint="Energia utilizada em Watts"
+            android:hint="@string/energy"
             android:layout_alignParentTop="true"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -29,6 +31,7 @@
         android:id="@+id/layoutEditTextTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/blackHint"
         android:layout_below="@id/layoutEditTextEnergy">
 
         <EditText
@@ -36,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="number"
-            android:hint="Horas por dia"/>
+            android:hint="@string/hoursPerDay"/>
 
 
     </android.support.design.widget.TextInputLayout>
@@ -45,6 +48,7 @@
         android:id="@+id/layoutEditTextInsolation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/blackHint"
         android:layout_below="@id/layoutEditTextTime">
 
     <EditText
@@ -52,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="numberDecimal"
-            android:hint="Indice de insolacao da regiao"/>
+            android:hint="@string/insolation"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -60,13 +64,14 @@
         android:id="@+id/layoutEditTextPercent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/blackHint"
         android:layout_below="@id/layoutEditTextInsolation">
 
         <EditText
             android:id="@+id/editTextPercent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Porcentagem de efetividade"
+            android:hint="@string/percentInverter"
             android:inputType="number" />
 
     </android.support.design.widget.TextInputLayout>
@@ -75,13 +80,14 @@
         android:id="@+id/layoutEditTextPower"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/blackHint"
         android:layout_below="@id/layoutEditTextPercent">
 
         <EditText
             android:id="@+id/editTextPower"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Potência da placa"
+            android:hint="@string/solarPanelPower"
             android:inputType="number" />
 
     </android.support.design.widget.TextInputLayout>
@@ -92,8 +98,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Calcular"
+        android:text="@string/calculate"
+        android:layout_margin="5dp"
+        android:background="@drawable/style_button"
         android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
         android:layout_below="@id/layoutEditTextPower"/>
 
 </RelativeLayout>
