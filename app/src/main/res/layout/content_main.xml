@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="number"
-            android:hint="@string/hoursPerDay"/>
+            android:hint="@string/hours_per_day"/>
 
 
     </android.support.design.widget.TextInputLayout>
@@ -71,7 +71,7 @@
             android:id="@+id/editTextPercent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/percentInverter"
+            android:hint="@string/percent_inverter"
             android:inputType="number" />
 
     </android.support.design.widget.TextInputLayout>
@@ -87,7 +87,7 @@
             android:id="@+id/editTextPower"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/solarPanelPower"
+            android:hint="@string/solar_panel_power"
             android:inputType="number" />
 
     </android.support.design.widget.TextInputLayout>

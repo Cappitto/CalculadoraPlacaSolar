@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity{
     E -> energy = Energia utilizada pelo local de instalação em KiloWatts.
     T -> time = Tempo em horas que os equipamentos conectados à rede funcionam por dia.
     I -> insolation = Índice de insolação da região (utilizando como base o mês com menor insolação).
-    P -> power = Potencia da placa solar em watts a ser implantada no sistema.
-    L -> percent = Porcentagem da efetividade do inversor do sistema (em média 80%).
+    P -> power = Potencia da placa solar em watts a ser implantada no sistema. 250W por default.
+    L -> percent = Porcentagem da efetividade do inversor do sistema (em média 80%). 0.8 ou 80% por default.
      */
-    private double energy, time, power = 250.0, insolation, percent = 80, result = 0.0;
+    private double energy, time, power, insolation, percent, result = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +62,14 @@ public class MainActivity extends AppCompatActivity{
                     double minPower = kwPerDay * (percent/100)/ (insolation);
                     // está sendo multiplicado por 1000 pois minpower está em kW mas power está em watts.
                     result = Math.ceil(minPower*1000/power);
-
+                    String dialogMessage = getString(R.string.panel_amount) + (int) result + "\n";
+                    // verificando se os valores inseridos nas entradas Efetividade e Potencia estão vazios, para então colocar
+                    // um aviso no final dizendo que os valores default estão sendo utilizados.
+                    dialogMessage = percent == 80 ? dialogMessage + getString(R.string.default_percent) : dialogMessage;
+                    dialogMessage = power == 250.0 ? dialogMessage + getString(R.string.default_power) : dialogMessage;
+                    // caixa de dialogo mostrando resultado final.
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setMessage(getString(R.string.panelAmount) + format(result));
+                    builder.setMessage(dialogMessage);
                     builder.setCancelable(true);
                     builder.setPositiveButton(getString(R.string.calculate_again), new DialogInterface.OnClickListener() {
                         @Override
@@ -90,6 +95,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void clearBoxes(){
+        // limpa os campos para inserir novos valores caso o usuario clique em Calcular novamente.
         editTextEnergy.setText("");
         editTextTime.setText("");
         editTextInsolation.setText("");
@@ -98,44 +104,41 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private boolean checkLength(){
+        // essa função verifica se os campos foram preenchidos, se caso não estiverem retorna falso,
+        // retorna verdadeiro caso os campos (exceto os que possuem default) estiverem preenchidos.
         String strEnergy = editTextEnergy.getText().toString();
         String strTime = editTextTime.getText().toString();
         String strInsolation = editTextInsolation.getText().toString();
         String strPercent = editTextPercent.getText().toString();
         String strPower = editTextPower.getText().toString();
-        if (!strEnergy.trim().isEmpty() & !strTime.trim().isEmpty() & !strInsolation.trim().isEmpty() &
-                !strPercent.trim().isEmpty() & !strPower.trim().isEmpty()){
+        if (!strEnergy.trim().isEmpty() & !strTime.trim().isEmpty() & !strInsolation.trim().isEmpty()){
             energy = Double.parseDouble(strEnergy);
             time = Double.parseDouble(strTime);
             insolation = Double.parseDouble(strInsolation);
-            percent = Double.parseDouble(strPercent);
-            power = Double.parseDouble(strPower);
+            percent = 80;
+            power = 250.0;
+            if (!strPercent.trim().isEmpty()) {
+                percent = Double.parseDouble(strPercent);
+            }
+            if (!strPower.trim().isEmpty()){
+                power = Double.parseDouble(strPower);
+            }
             return true;
         }
         return false;
 
     }
 
-    private static String format(double x){
-        DecimalFormat df = new DecimalFormat("###,###,###,##0.###");
-        return df.format(x);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_about){
             startActivity(new Intent(MainActivity.this, AboutActivity.class));
             return true;
