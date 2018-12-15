@@ -1,8 +1,10 @@
 package com.cappcreations.calculadoraplacasolar;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,6 +21,7 @@ import java.text.DecimalFormat;
 public class MainActivity extends AppCompatActivity{
 
     private EditText editTextEnergy, editTextTime, editTextInsolation, editTextPercent, editTextPower;
+    private Button buttonCalculate;
     /*
     E -> energy = Energia utilizada pelo local de instalação em KiloWatts.
     T -> time = Tempo em horas que os equipamentos conectados à rede funcionam por dia.
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
         editTextPercent = findViewById(R.id.editTextPercent);
         editTextPower = findViewById(R.id.editTextPower);
 
-        Button buttonCalculate = findViewById(R.id.buttonCalculate);
+        buttonCalculate = findViewById(R.id.buttonCalculate);
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,15 +56,15 @@ public class MainActivity extends AppCompatActivity{
 
                     Formulas:
                     kwhperday = e * t
-                    minpower = kwperday/(i * l)
+                    minpower = kwperday / (i * l)
                     n = minpower / power
                     */
                     // está sendo dividido por 1000 pois o usuario fornece em Watts, mas a formula trata como kW.
                     double kwPerDay = (energy * time)/1000;
-                    // está sendo dividido por 100 pois é uma porcentagem e o usuario fornecer um valor entre 100 e 0, mas
+                    // percent está sendo dividido por 100 pois é uma porcentagem e o usuario fornecer um valor entre 100 e 0, mas
                     // porcentagem está entre 1 e 0.
-                    double minPower = kwPerDay * (percent/100)/ (insolation);
-                    // está sendo multiplicado por 1000 pois minpower está em kW mas power está em watts.
+                    double minPower = kwPerDay / (insolation * (percent/100));
+                    // minpower está sendo multiplicado por 1000 pois minpower está em kW mas power está em watts.
                     result = Math.ceil(minPower*1000/power);
                     String dialogMessage = getString(R.string.panel_amount) + (int) result + "\n";
                     // verificando se os valores inseridos nas entradas Efetividade e Potencia estão vazios, para então colocar
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity{
                     dialog.show();
                 }
                 else {
+                    hideKeyboard(buttonCalculate);
                     Snackbar.make(view, getString(R.string.fill_boxes), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
@@ -127,6 +132,12 @@ public class MainActivity extends AppCompatActivity{
         }
         return false;
 
+    }
+
+    private void hideKeyboard(View view){
+        // essa função esconde o teclado ao clicar no botão Calcular caso checkLength retorne falso.
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override

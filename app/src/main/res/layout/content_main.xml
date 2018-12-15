@@ -8,7 +8,9 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:layout_margin="3dp">
+    android:layout_margin="3dp"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/layoutEditTextEnergy"
